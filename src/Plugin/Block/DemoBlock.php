@@ -104,8 +104,10 @@ class DemoBlock extends BlockBase implements ContainerFactoryPluginInterface {
         ->condition('status', 1)
         // only nodes of the type 'tv_episode'
         ->condition('type', 'tv_episode')
-        // order by post date
-        ->sort('created', 'DESC')
+        // order by season number
+        ->sort('field_related_season.entity.field_season_number.value', 'DESC')
+        // order by episode number
+        ->sort('field_episode_number', 'DESC')
         // just the latest 5 items
         ->range(0, 5)
         // Note we can chain into any field on the related entity in a condition.
