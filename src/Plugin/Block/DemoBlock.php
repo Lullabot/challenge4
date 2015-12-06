@@ -138,6 +138,15 @@ class DemoBlock extends BlockBase implements ContainerFactoryPluginInterface {
     return [
         '#theme' => 'item_list',
         '#items' => $items,
+
+        // Cache it by route. Without this the same content would appear on every page.
+        // See https://www.drupal.org/developing/api/8/render/arrays/cacheability
+        // See https://www.drupal.org/developing/api/8/cache/contexts
+        '#cache' => [
+          'contexts' => [
+            'route',
+          ],
+        ],
     ];
 
   }
