@@ -44,6 +44,7 @@ class DemoBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * @var Drupal\Core\Entity\Query\QueryFactory
    */
   protected $entity_query;
+
   /**
    * Construct.
    *
@@ -53,15 +54,20 @@ class DemoBlock extends BlockBase implements ContainerFactoryPluginInterface {
    *   The plugin_id for the plugin instance.
    * @param string $plugin_definition
    *   The plugin implementation definition.
+   *
+   * Add type-hinted parameters for any services to be injected into this class
+   * following the normal parameters.
    */
   public function __construct(
         array $configuration,
         $plugin_id,
         $plugin_definition,
         EntityManager $entity_manager,
-	       QueryFactory $entity_query
+        QueryFactory $entity_query
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    // Make each of injected service available as a variable in the class.
     $this->entity_manager = $entity_manager;
     $this->entity_query = $entity_query;
   }
@@ -70,6 +76,11 @@ class DemoBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+
+    // Add additional services to the list of normal class parameters.
+    // Use container->get() for each service, and add them in the same
+    // order they were listed in __construct().
+
     return new static(
       $configuration,
       $plugin_id,
