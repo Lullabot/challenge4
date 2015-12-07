@@ -7,9 +7,8 @@
 
 namespace Drupal\challenge4\Plugin\Block;
 
-//  Basic block plugin requirements.
+//  Basic block plugin requirement.
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormStateInterface;
 
 // Used when injecting services.
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
